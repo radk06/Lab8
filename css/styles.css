@@ -9,17 +9,40 @@ body {
         "nav main"
         "footer footer";
     height: 100vh;
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
 }
 
-/* Header and Footer */
+/* Header Split with 1/8th Image */
 header {
     grid-area: header;
-    background-color: #859cc6;
-    color: #eee;
+    display: flex;
+    align-items: center;
+    height: 150px;
+    background-color: #8ca2cf;
+}
+/* Left Side - Header Image */
+header .header-image {
+    flex: 1;
+    max-width: 12.5%;
+    background-image: url('../images/lighthouselogo.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+}
+/* Right Side - Text */
+header .header-text {
+    flex: 7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #000000;
+    font-size: 2.25em;
     text-align: center;
-    padding: 20px 0;
+    padding: 0 10px;
 }
 
+/* Footer */
 footer {
     grid-area: footer;
     background-color: #859cc6;
@@ -29,8 +52,10 @@ footer {
 }
 
 /* Navigation */
+.nav-wrapper {
+    grid-area: nav; /* Sidebar for desktop */
+}
 nav {
-    grid-area: nav;
     background-color: pink;
     color: white;
     padding: 20px;
@@ -39,45 +64,52 @@ nav {
     display: flex;
     flex-direction: column;
 }
-
 nav a {
     margin-bottom: 10px;
     color: white;
     text-decoration: none;
     padding: 10px;
+    border-radius: 4px;
+}
+nav a:hover {
+    text-shadow: 0px 0px 1px rgb(255, 255, 255);
 }
 
-nav a:hover {
-    text-shadow: 0px 0px 1px rgb(20, 70, 20);
+/* Main Content Wrapper */
+#content-wrapper {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    grid-area: main;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 /* Main Content Area */
-main {
-    grid-area: main;
-    padding: 20px;
-    display: grid;
-    grid-template-columns: 3fr 1fr;
-    grid-gap: 20px;
-}
-
 #content {
+    flex: 3;
     display: flex;
     flex-direction: column;
     gap: 20px;
 }
 
+/* Side Image */
+#side-image {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
 #side-image img {
-    width: 100%;
+    width: 400px;
     height: auto;
-    display: block;
     object-fit: cover;
 }
 
-/* Responsive Design */
-
-/* Tablet */
+/* Tablet Styles */
 @media (max-width: 1024px) {
     body {
+        grid-template-rows: auto auto 1fr auto;
         grid-template-columns: 1fr;
         grid-template-areas:
             "header"
@@ -86,19 +118,84 @@ main {
             "footer";
     }
 
+    header {
+        height: 200px;
+        flex-direction: row-reverse;
+    }
+
+    header .header-text {
+        font-size: 2em;
+        padding: 0 5px;
+    }
+
     nav {
         flex-direction: row;
         justify-content: space-around;
+        padding: 10px;
     }
 
-    main {
-        grid-template-columns: 1fr;
+    #content-wrapper {
+        flex-direction: row;
+        gap: 15px;
+    }
+
+    #side-image img {
+        width: 400px;
     }
 }
 
-/* Mobile */
+/* Mobile Styles */
 @media (max-width: 768px) {
+    body {
+        grid-template-rows: auto auto 1fr auto;
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "header"
+            "nav"
+            "main"
+            "footer";
+    }
+
+    header {
+        height: 200px;
+        flex-direction: row-reverse;
+    }
+
+    header .header-text {
+        font-size: 2em;
+        padding: 0 5px;
+    }
+
+    header .header-image {
+        max-width: 20%;
+    }
+
     nav {
         flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+
+    nav a {
+        margin: 5px 0;
+        text-align: center;
+    }
+
+    #content-wrapper {
+        flex-direction: column;
+    }
+
+    #content {
+        order: 1;
+    }
+
+    #side-image {
+        order: 2;
+        margin-top: 20px;
+        justify-content: center;
+    }
+
+    #side-image img {
+        max-width: 400px;
     }
 }
