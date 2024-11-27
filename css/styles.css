@@ -53,7 +53,7 @@ footer {
 
 /* Navigation */
 .nav-wrapper {
-    grid-area: nav; /* Sidebar for desktop */
+    grid-area: nav;
 }
 nav {
     background-color: pink;
